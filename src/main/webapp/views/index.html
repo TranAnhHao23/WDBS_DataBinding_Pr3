@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<h3>Product Management</h3>
+
+<h3 th:class="notify" th:if="${message} != null">
+    <span th:text="${message}"></span>
+</h3>
+<p>
+    <a th:href="@{/product/create}">
+        Add new product
+    </a>
+</p>
+<div th:if="${products.isEmpty() == false}">
+    <table id="products">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Image</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.description}"></td>
+            <td><img width="100" height="100" th:src="@{'/image/' + ${product.image}}" alt="nothing"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
