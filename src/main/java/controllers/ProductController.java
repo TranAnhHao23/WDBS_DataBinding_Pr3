@@ -36,14 +36,8 @@ public class ProductController {
     public ModelAndView showAll() {
         ModelAndView modelAndView = new ModelAndView("index");
         ArrayList<Product> products = productService.findAll();
-        if (products.isEmpty()) {
-            modelAndView.addObject("message", "No products!");
-            modelAndView.addObject("color", "red");
-        }
-//        modelAndView.addObject("file", view);
+        modelAndView.addObject("file", view);
         modelAndView.addObject("products", products);
-        System.out.println(fileUpload);
-        System.out.println(view);
         return modelAndView;
     }
 
@@ -67,6 +61,7 @@ public class ProductController {
         Product product = new Product(productForm.getId(), productForm.getName(), productForm.getDescription(), fileName);
         productService.save(product);
         ArrayList<Product> products = productService.findAll();
+        modelAndView.addObject("file", view);
         modelAndView.addObject("products", products);
         return modelAndView;
     }
